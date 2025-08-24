@@ -1,0 +1,117 @@
+{
+  "description": "Hope Index MVP schema for Optimism API & AISTU",
+  "version": "0.1",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "example": "HI-2025-0001"
+    },
+    {
+      "name": "date_logged",
+      "type": "date",
+      "required": true,
+      "example": "2025-08-24"
+    },
+    {
+      "name": "date_event",
+      "type": "date",
+      "required": false,
+      "example": "2025-08-20"
+    },
+    {
+      "name": "domain",
+      "type": "string",
+      "enum": [
+        "Health",
+        "Climate",
+        "Accessibility",
+        "Materials",
+        "Space",
+        "Education",
+        "Security",
+        "Energy",
+        "Governance",
+        "Agriculture"
+      ]
+    },
+    {
+      "name": "paradigm",
+      "type": "string",
+      "enum": [
+        "Breakthrough",
+        "Deployment",
+        "Policy",
+        "Collaboration",
+        "Funding",
+        "Tooling"
+      ]
+    },
+    {
+      "name": "scale",
+      "type": "string",
+      "enum": [
+        "Local",
+        "National",
+        "Global",
+        "Planetary"
+      ]
+    },
+    {
+      "name": "time_horizon",
+      "type": "string",
+      "enum": [
+        "Immediate",
+        "1-5y",
+        "10+y"
+      ]
+    },
+    {
+      "name": "geography",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "summary",
+      "type": "string"
+    },
+    {
+      "name": "impact_metric",
+      "type": "string"
+    },
+    {
+      "name": "credibility_score",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    {
+      "name": "hope_score",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    {
+      "name": "sources",
+      "type": "string"
+    },
+    {
+      "name": "tags",
+      "type": "string"
+    }
+  ],
+  "scoring_rubric": {
+    "hope_score_formula": "round(0.3*scale_score + 0.3*impact_score + 0.2*speed_score + 0.2*credibility_norm)",
+    "components": {
+      "scale_score": "Local=3, National=6, Global=9, Planetary=10",
+      "impact_score": "Map tangible effect: e.g., beneficiaries: (<1k:3, 1k-10k:5, 10k-100k:7, 100k+:9, systemic/policy shift:10) OR % improvement: (<5%:3, 5-15%:5, 15-30%:7, >30%:9, step-change:10)",
+      "speed_score": "Time horizon inverted: Immediate=10, 1-5y=6, 10+y=3",
+      "credibility_norm": "Normalize credibility_score (1-5) to 2-10 by *2"
+    },
+    "notes": "Choose the most appropriate impact mapping; document logic in summary if ambiguous."
+  }
+}
