@@ -25,4 +25,29 @@ Use Cases
 	•	Prototyping the Optimism API, where optimism becomes searchable and retrievable by query.
 	•	Inspiring other researchers, writers, and designers to structure positive narratives with the same rigor usually applied to risks.
 
-The Hope Index is an MVP (minimum viable product). It currently contains ~25 entries, but its structure is extensible. The vision: a living database of optimism, continuously updated and consumable by both humans and AI systems.
+The Hope Index is an MVP (minimum viable product) but its structure is infinitely extensible. The vision: a living database of optimism, continuously updated and consumable by both humans and AI systems.
+
+## Wildfire Vertical (Worked Example)
+
+To demonstrate the Hope Index schema in practice, this repository includes a **wildfire-specific dataset**:  
+[`hope_index_wildfire_full.csv`](./hope_index_wildfire_full.csv)
+
+This file captures a full “vertical” view of AI-driven wildfire detection, prevention, and response systems.  
+It includes entries from government, corporate, academic, and community sources — each normalized to the Hope Index v0.2 schema.
+
+### Why Wildfire?
+Wildfire response is a prime case study: it spans satellites, indigenous knowledge, machine learning forecasts, insurance economics, and military/utility applications. By running a single domain through the Hope Index pipeline, we can demonstrate:
+
+- **Source validation:** Government reports (U.S. Congress, NASA, DARPA), corporate programs (Google FireSat, Pano AI), NGOs (NAILSMA), and insurance/economic assessments.  
+- **Lifecycle tracking:** Items move from *announced* → *pilot* → *deployed* → *scaled*.  
+- **Negative space:** Some entries include uncertainty (`uncertainty_level`) or hype risk (`hype_risk`) to show limitations.  
+- **Relationships:** Linked entries (e.g., Google FireSat R&D → Earth Fire Alliance validation).
+
+### Example Entries
+- **DARPA Testbed (HI-WF-0001):** $59.8M autonomy program for helicopters fighting wildfires in Texas (pilot, medium certainty).  
+- **Google FireSat (HI-WF-0002):** Satellite constellation with 5x5m detection resolution (deployed, low hype risk).  
+- **Healthy Country AI (HI-WF-0009):** Indigenous-led fire management initiative in Australia with CSIRO ($2.6M grant, pilot).  
+- **U.S. Congress Report (HI-WF-0004):** Annual wildfire costs estimated at $394–893B (policy/economic anchor, verified).  
+
+### Usage
+This wildfire dataset acts as a **calibration domain** for the larger Hope Index. It demonstrates how diverse, messy information can be structured for both **human dashboards** and **AI-readable JSON/API outputs.**
