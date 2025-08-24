@@ -1,0 +1,208 @@
+{
+  "description": "Hope Index schema v0.2 with validation & lifecycle fields",
+  "version": "0.2",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "example": "HI-2025-0001"
+    },
+    {
+      "name": "date_logged",
+      "type": "date",
+      "required": true,
+      "example": "2025-08-24"
+    },
+    {
+      "name": "date_event",
+      "type": "date",
+      "required": false,
+      "example": "2025-08-20"
+    },
+    {
+      "name": "domain",
+      "type": "string",
+      "enum": [
+        "Health",
+        "Climate",
+        "Accessibility",
+        "Materials",
+        "Space",
+        "Education",
+        "Security",
+        "Energy",
+        "Governance",
+        "Agriculture"
+      ]
+    },
+    {
+      "name": "paradigm",
+      "type": "string",
+      "enum": [
+        "Breakthrough",
+        "Deployment",
+        "Policy",
+        "Collaboration",
+        "Funding",
+        "Tooling"
+      ]
+    },
+    {
+      "name": "scale",
+      "type": "string",
+      "enum": [
+        "Local",
+        "National",
+        "Global",
+        "Planetary"
+      ]
+    },
+    {
+      "name": "time_horizon",
+      "type": "string",
+      "enum": [
+        "Immediate",
+        "1-5y",
+        "10+y"
+      ]
+    },
+    {
+      "name": "geography",
+      "type": "string"
+    },
+    {
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "summary",
+      "type": "string"
+    },
+    {
+      "name": "impact_metric",
+      "type": "string"
+    },
+    {
+      "name": "credibility_score",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    {
+      "name": "hope_score",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    {
+      "name": "sources",
+      "type": "string"
+    },
+    {
+      "name": "tags",
+      "type": "string"
+    },
+    {
+      "name": "verification_status",
+      "type": "string",
+      "enum": [
+        "claimed",
+        "pilot",
+        "deployed",
+        "scaled",
+        "policy"
+      ]
+    },
+    {
+      "name": "verified_sources_count",
+      "type": "integer",
+      "minimum": 0,
+      "example": 2
+    },
+    {
+      "name": "update_status",
+      "type": "string",
+      "enum": [
+        "announced",
+        "pilot",
+        "deployed",
+        "scaled",
+        "retired"
+      ]
+    },
+    {
+      "name": "organization_type",
+      "type": "string",
+      "enum": [
+        "academic",
+        "startup",
+        "enterprise",
+        "government",
+        "NGO"
+      ]
+    },
+    {
+      "name": "funding_status",
+      "type": "string",
+      "enum": [
+        "research",
+        "seed",
+        "series",
+        "grant",
+        "public",
+        "revenue"
+      ]
+    },
+    {
+      "name": "uncertainty_level",
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    {
+      "name": "hype_risk",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    {
+      "name": "related_entries",
+      "type": "string",
+      "example": "HI-2025-0001;HI-2025-0009"
+    }
+  ],
+  "api_suggestions": {
+    "endpoints": {
+      "/stories": "Filter by domain, scale, hope_score, verification_status, pagination",
+      "/trends": "Return time-series aggregates by domain/paradigm/scale over date_event",
+      "/connections": "Return related_entries graph for a given id"
+    },
+    "pagination": {
+      "default_limit": 20,
+      "max_limit": 100,
+      "cursor": "opaque string"
+    }
+  },
+  "scoring_rubric": {
+    "hope_score_formula": "round(0.3*scale_score + 0.3*impact_score + 0.2*speed_score + 0.2*credibility_norm)",
+    "calibration": "Use anchor examples at scores 3, 5, 7, 9 across domains to maintain consistency. Document rationale.",
+    "components": {
+      "scale_score": "Local=3, National=6, Global=9, Planetary=10",
+      "impact_score": "Beneficiaries or % improvement mapped to 3/5/7/9; 10 for systemic step-change",
+      "speed_score": "Immediate=10, 1-5y=6, 10+y=3",
+      "credibility_norm": "credibility_score (1-5) * 2; add +1 if verified_sources_count >= 2 (cap at 10)"
+    },
+    "negative_space": {
+      "uncertainty_level": "low/medium/high to reflect maturity and evidence strength",
+      "hype_risk": "1-5 score; 3=normal hype, 5=high hype risk"
+    },
+    "lifecycle": {
+      "verification_status": "claimed\u2192pilot\u2192deployed\u2192scaled",
+      "update_status": "announced\u2192pilot\u2192deployed\u2192scaled\u2192retired"
+    }
+  }
+}
