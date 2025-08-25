@@ -1,0 +1,136 @@
+{
+  "schema_version": "0.4",
+  "description": "Hope Index schema for structured optimism dataset (wildfire vertical example). All scoring fields standardized to 0–10 scale.",
+  "fields": {
+    "id": {
+      "type": "string",
+      "example": "HI-WF-0001",
+      "description": "Unique identifier for each entry"
+    },
+    "date_logged": {
+      "type": "date",
+      "example": "2025-08-24",
+      "description": "Date the entry was added to the dataset"
+    },
+    "date_event": {
+      "type": "date",
+      "example": "2025-07-31",
+      "description": "Date the event occurred"
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["Climate", "Health", "Accessibility", "Energy", "Space", "Other"],
+      "description": "Top-level category domain"
+    },
+    "paradigm": {
+      "type": "string",
+      "enum": ["Breakthrough", "Deployment", "Policy", "Collaboration", "Funding", "Research", "Economic", "International"],
+      "description": "Type of development"
+    },
+    "scale": {
+      "type": "string",
+      "enum": ["Local", "Regional", "National", "Global", "Planetary"],
+      "description": "Narrative scale label"
+    },
+    "time_horizon": {
+      "type": "string",
+      "enum": ["Immediate", "1-5y", "10+y"],
+      "description": "Expected time to measurable impact"
+    },
+    "geography": {
+      "type": "string",
+      "example": "Texas, USA",
+      "description": "Location of the breakthrough"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short descriptive headline"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Concise narrative summary"
+    },
+    "impact_metric": {
+      "type": "string",
+      "example": "30M acres protected",
+      "description": "Quantitative or qualitative measure of impact"
+    },
+    "impact_score": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Impact score (anchors: 3, 5, 7, 9, 10)"
+    },
+    "speed_score": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Speed score based on time horizon (Immediate=10, 1–5y=6, 10+y=3)"
+    },
+    "scale_score": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Scale score (Local=3, National=6, Global=9, Planetary=10)"
+    },
+    "credibility_score": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Credibility score, normalized and capped at 10"
+    },
+    "hope_score": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Composite hope score"
+    },
+    "sources": {
+      "type": "array",
+      "items": "string",
+      "example": ["https://www.darpa.mil/news/2025/texas-darpa-alias-testbed"],
+      "description": "List of source URLs"
+    },
+    "tags": {
+      "type": "array",
+      "items": "string",
+      "example": ["wildfire", "autonomy", "DARPA"],
+      "description": "Keyword tags"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": ["claimed", "pilot", "deployed", "scaled", "verified"],
+      "description": "Lifecycle / validation stage"
+    },
+    "verified_sources_count": {
+      "type": "integer",
+      "description": "Count of independent sources"
+    },
+    "update_status": {
+      "type": "string",
+      "enum": ["announced", "pilot", "deployed", "scaled", "retired"],
+      "description": "Deployment lifecycle status"
+    },
+    "organization_type": {
+      "type": "string",
+      "enum": ["government", "startup", "enterprise", "NGO", "academic", "international", "private"],
+      "description": "Type of lead organization"
+    },
+    "funding_status": {
+      "type": "string",
+      "enum": ["public", "grant", "seed", "series", "revenue", "other"],
+      "description": "Funding stage"
+    },
+    "uncertainty_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Assessment of uncertainty"
+    },
+    "hype_risk": {
+      "type": "integer",
+      "range": "0–10",
+      "description": "Degree of hype vs. evidence (0=none, 10=max hype)"
+    },
+    "related_entries": {
+      "type": "array",
+      "items": "string",
+      "example": ["HI-WF-0002"],
+      "description": "IDs of related entries"
+    }
+  }
+}
